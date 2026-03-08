@@ -83,6 +83,28 @@
             100% { transform: translateY(100vh) rotate(720deg); opacity: 0; }
         }
 
+        /* Animação de vento suave para polaroids */
+        @keyframes windSway1 {
+            0%, 100% { transform: rotate(-2deg) translateY(0px); }
+            25% { transform: rotate(1deg) translateY(-3px); }
+            50% { transform: rotate(-1deg) translateY(-1px); }
+            75% { transform: rotate(2deg) translateY(-4px); }
+        }
+
+        @keyframes windSway2 {
+            0%, 100% { transform: rotate(1deg) translateY(0px); }
+            25% { transform: rotate(-2deg) translateY(-4px); }
+            50% { transform: rotate(2deg) translateY(-2px); }
+            75% { transform: rotate(-1deg) translateY(-3px); }
+        }
+
+        @keyframes windSway3 {
+            0%, 100% { transform: rotate(-1deg) translateY(0px); }
+            25% { transform: rotate(2deg) translateY(-2px); }
+            50% { transform: rotate(-2deg) translateY(-4px); }
+            75% { transform: rotate(1deg) translateY(-1px); }
+        }
+
         .reveal-text {
             opacity: 0;
             transform: translateY(20px);
@@ -457,34 +479,135 @@
             font-weight: 300;
         }
 
-        /* Fotos normais - SIMPLES */
-        .fotos-section {
+        /* SEÇÃO DE POLAROIDS - ESTILO NOVO */
+        .polaroids-section {
             padding: 100px 20px;
+            background: linear-gradient(to bottom, var(--cream), var(--sand));
             display: flex;
             justify-content: center;
+            align-items: flex-start;
+            min-height: 100vh;
+        }
+
+        .polaroids-container {
+            position: relative;
+            display: flex;
+            flex-direction: column;
             align-items: center;
-            gap: 30px;
-            flex-wrap: wrap;
-            background: linear-gradient(to bottom, var(--cream), var(--sand));
+            gap: 0;
+            padding: 40px 0;
         }
 
-        .foto-item {
-            width: 280px;
-            height: 350px;
-            border-radius: 8px;
+        /* Linhas de conexão delicadas */
+        .connection-line {
+            width: 1px;
+            height: 60px;
+            background: linear-gradient(to bottom, 
+                transparent 0%, 
+                rgba(184, 92, 72, 0.3) 20%, 
+                rgba(184, 92, 72, 0.3) 80%, 
+                transparent 100%
+            );
+            position: relative;
+            opacity: 0.6;
+        }
+
+        .connection-line::before,
+        .connection-line::after {
+            content: '';
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 4px;
+            height: 4px;
+            background: var(--terracota-light);
+            border-radius: 50%;
+            opacity: 0.5;
+        }
+
+        .connection-line::before {
+            top: 0;
+        }
+
+        .connection-line::after {
+            bottom: 0;
+        }
+
+        /* Estilo Polaroid */
+        .polaroid {
+            background: var(--white);
+            padding: 15px 15px 60px 15px;
+            box-shadow: 
+                0 4px 6px rgba(0,0,0,0.05),
+                0 10px 20px rgba(0,0,0,0.08),
+                0 2px 4px rgba(0,0,0,0.04);
+            transform-origin: center center;
+            transition: all 0.4s ease;
+            position: relative;
+            cursor: pointer;
+        }
+
+        .polaroid:hover {
+            transform: scale(1.03) rotate(0deg) !important;
+            box-shadow: 
+                0 8px 12px rgba(0,0,0,0.08),
+                0 20px 40px rgba(0,0,0,0.12),
+                0 4px 8px rgba(0,0,0,0.06);
+            z-index: 10;
+        }
+
+        .polaroid-image {
+            width: 260px;
+            height: 320px;
             overflow: hidden;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-            transition: transform 0.3s ease;
+            position: relative;
+            background: var(--sand);
         }
 
-        .foto-item:hover {
-            transform: translateY(-5px);
-        }
-
-        .foto-item img {
+        .polaroid-image img {
             width: 100%;
             height: 100%;
             object-fit: cover;
+            filter: sepia(10%) contrast(1.05) brightness(1.02);
+            transition: all 0.4s ease;
+        }
+
+        .polaroid:hover .polaroid-image img {
+            filter: sepia(0%) contrast(1.1) brightness(1.05);
+            transform: scale(1.05);
+        }
+
+        /* Animações de vento individuais */
+        .polaroid:nth-child(1) {
+            animation: windSway1 6s ease-in-out infinite;
+            transform: rotate(-3deg);
+        }
+
+        .polaroid:nth-child(3) {
+            animation: windSway2 7s ease-in-out infinite;
+            animation-delay: 0.5s;
+            transform: rotate(2deg);
+        }
+
+        .polaroid:nth-child(5) {
+            animation: windSway3 5s ease-in-out infinite;
+            animation-delay: 1s;
+            transform: rotate(-2deg);
+        }
+
+        /* Fita adesiva sutil */
+        .polaroid::before {
+            content: '';
+            position: absolute;
+            top: -10px;
+            left: 50%;
+            transform: translateX(-50%) rotate(-2deg);
+            width: 80px;
+            height: 25px;
+            background: rgba(255, 255, 255, 0.6);
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            z-index: 5;
+            opacity: 0.8;
         }
 
         /* Local + Mapa */
@@ -1055,9 +1178,14 @@
                 left: 30px;
             }
 
-            .foto-item {
-                width: 240px;
-                height: 300px;
+            /* Ajustes para polaroids no mobile */
+            .polaroid-image {
+                width: 220px;
+                height: 270px;
+            }
+
+            .connection-line {
+                height: 40px;
             }
 
             .calendario-container {
@@ -1198,16 +1326,35 @@
         </div>
     </section>
 
-    <!-- Fotos normais (antigas polaroids) -->
-    <section class="fotos-section">
-        <div class="foto-item reveal-text">
-            <img src="https://lh3.googleusercontent.com/d/1_r4LFA_0r7LmEaVZui4jQWb5weMfPvSi" alt="Pré Wedding 1">
-        </div>
-        <div class="foto-item reveal-text">
-            <img src="https://lh3.googleusercontent.com/d/1RkycrWM8ZRq_BUH3edcwUVcqmmhuN4Wd" alt="Pré Wedding 2">
-        </div>
-        <div class="foto-item reveal-text">
-            <img src="https://lh3.googleusercontent.com/d/11c5iNEv9sX0N1kj4Kzx-B3rXKoPFCFmD" alt="Pré Wedding 3">
+    <!-- SEÇÃO DE POLAROIDS - ESTILO NOVO -->
+    <section class="polaroids-section">
+        <div class="polaroids-container">
+            <!-- Polaroid 1 -->
+            <div class="polaroid reveal-text">
+                <div class="polaroid-image">
+                    <img src="https://lh3.googleusercontent.com/d/1_r4LFA_0r7LmEaVZui4jQWb5weMfPvSi" alt="Pré Wedding 1">
+                </div>
+            </div>
+            
+            <!-- Linha de conexão 1 -->
+            <div class="connection-line"></div>
+            
+            <!-- Polaroid 2 -->
+            <div class="polaroid reveal-text">
+                <div class="polaroid-image">
+                    <img src="https://lh3.googleusercontent.com/d/1RkycrWM8ZRq_BUH3edcwUVcqmmhuN4Wd" alt="Pré Wedding 2">
+                </div>
+            </div>
+            
+            <!-- Linha de conexão 2 -->
+            <div class="connection-line"></div>
+            
+            <!-- Polaroid 3 -->
+            <div class="polaroid reveal-text">
+                <div class="polaroid-image">
+                    <img src="https://lh3.googleusercontent.com/d/11c5iNEv9sX0N1kj4Kzx-B3rXKoPFCFmD" alt="Pré Wedding 3">
+                </div>
+            </div>
         </div>
     </section>
 
@@ -1580,4 +1727,4 @@
     </script>
 
 </body>
-</html> ‌‍
+</html>
