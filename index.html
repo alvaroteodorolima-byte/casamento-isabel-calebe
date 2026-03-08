@@ -661,6 +661,27 @@
             font-style: italic;
         }
 
+        /* NOVO: Horário elegante */
+        .local-horario {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.1rem;
+            color: var(--text);
+            margin-bottom: 12px;
+            font-weight: 400;
+            letter-spacing: 1.5px;
+            position: relative;
+            display: inline-block;
+        }
+
+        .local-horario::before,
+        .local-horario::after {
+            content: '•';
+            margin: 0 12px;
+            color: var(--terracota-light);
+            font-size: 0.6rem;
+            vertical-align: middle;
+        }
+
         .local-endereco {
             font-size: 0.85rem;
             color: var(--text-light);
@@ -743,28 +764,53 @@
             transition: color 0.3s ease;
         }
 
-        /* Galeria do Sítio - SIMPLES */
+        /* Galeria do Sítio - COM DETALHES ORGÂNICOS */
         .galeria-sitio-section {
             padding: 60px 20px;
             background: var(--sand);
             overflow: hidden;
+            position: relative;
+        }
+
+        /* Elementos decorativos orgânicos sutis */
+        .galeria-sitio-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(to right, 
+                transparent 0%, 
+                rgba(184, 92, 72, 0.2) 20%, 
+                rgba(184, 92, 72, 0.2) 80%, 
+                transparent 100%
+            );
+        }
+
+        .galeria-sitio-wrapper {
+            position: relative;
+            max-width: 1400px;
+            margin: 0 auto;
         }
 
         .galeria-sitio-scroll {
             display: flex;
-            gap: 20px;
+            gap: 30px;
             overflow-x: auto;
             scroll-snap-type: x mandatory;
             scrollbar-width: none;
             -ms-overflow-style: none;
-            padding: 20px 0;
+            padding: 40px 20px;
             cursor: grab;
+            position: relative;
         }
 
         .galeria-sitio-scroll::-webkit-scrollbar {
             display: none;
         }
 
+        /* Conectores orgânicos entre fotos */
         .galeria-sitio-item {
             flex: 0 0 auto;
             width: 300px;
@@ -774,12 +820,102 @@
             scroll-snap-align: center;
             box-shadow: 0 10px 30px rgba(0,0,0,0.1);
             background: var(--terracota-light);
+            position: relative;
+            transition: all 0.4s ease;
+        }
+
+        .galeria-sitio-item::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            right: -30px;
+            width: 30px;
+            height: 1px;
+            background: linear-gradient(to right, 
+                rgba(184, 92, 72, 0.3) 0%, 
+                rgba(184, 92, 72, 0.1) 50%,
+                transparent 100%
+            );
+            transform: translateY(-50%);
+            pointer-events: none;
+        }
+
+        .galeria-sitio-item:last-child::after {
+            display: none;
+        }
+
+        /* Folha/nó orgânico sutil */
+        .galeria-sitio-item::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            right: -32px;
+            width: 6px;
+            height: 6px;
+            background: var(--terracota-light);
+            border-radius: 50%;
+            transform: translateY(-50%);
+            opacity: 0.4;
+            z-index: 2;
+        }
+
+        .galeria-sitio-item:last-child::before {
+            display: none;
         }
 
         .galeria-sitio-item img {
             width: 100%;
             height: 100%;
             object-fit: cover;
+            transition: all 0.5s ease;
+        }
+
+        .galeria-sitio-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+        }
+
+        .galeria-sitio-item:hover img {
+            transform: scale(1.05);
+        }
+
+        /* Linha orgânica decorativa abaixo */
+        .galeria-organic-line {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 200px;
+            height: 1px;
+            background: linear-gradient(to right, 
+                transparent 0%, 
+                rgba(184, 92, 72, 0.2) 30%, 
+                rgba(184, 92, 72, 0.2) 70%, 
+                transparent 100%
+            );
+            opacity: 0.6;
+        }
+
+        .galeria-organic-line::before {
+            content: '❦';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: var(--terracota-light);
+            font-size: 0.8rem;
+            opacity: 0.4;
+            background: var(--sand);
+            padding: 0 10px;
+        }
+
+        .galeria-hint {
+            text-align: center;
+            margin-top: 10px;
+            font-size: 0.75rem;
+            color: var(--text-light);
+            font-style: italic;
+            opacity: 0.8;
         }
 
         /* Save the Date */
@@ -1188,6 +1324,21 @@
                 height: 40px;
             }
 
+            /* Ajustes galeria mobile */
+            .galeria-sitio-item {
+                width: 260px;
+                height: 350px;
+            }
+
+            .galeria-sitio-item::after,
+            .galeria-sitio-item::before {
+                display: none;
+            }
+
+            .local-horario {
+                font-size: 0.95rem;
+            }
+
             .calendario-container {
                 padding: 25px;
             }
@@ -1196,11 +1347,6 @@
                 width: 38px;
                 height: 38px;
                 font-size: 0.8rem;
-            }
-
-            .galeria-sitio-item {
-                width: 260px;
-                height: 350px;
             }
 
             .presentes-section {
@@ -1326,7 +1472,7 @@
         </div>
     </section>
 
-    <!-- SEÇÃO DE POLAROIDS - ESTILO NOVO -->
+    <!-- SEÇÃO DE POLAROIDS -->
     <section class="polaroids-section">
         <div class="polaroids-container">
             <!-- Polaroid 1 -->
@@ -1372,6 +1518,8 @@
             <div class="local-info reveal-text">
                 <p class="local-subtitulo">Sítio</p>
                 <p class="local-nome">Espaço Verde Perto</p>
+                <!-- NOVO: Horário elegante -->
+                <p class="local-horario">Sábado, 27 de Junho de 2026 às 15h30</p>
                 <p class="local-endereco">R. dos Lírios, 317 — Quinta das Palmeiras<br>Pedro Leopoldo, MG — 33600-000</p>
             </div>
             <div class="mapa-container reveal-text">
@@ -1403,29 +1551,31 @@
         </div>
     </section>
 
-    <!-- Galeria do Sítio - FOTOS NORMAIS -->
+    <!-- Galeria do Sítio - COM DETALHES ORGÂNICOS -->
     <section class="galeria-sitio-section">
         <p class="section-label reveal-text" style="margin-bottom: 30px; color: var(--text-light);">O Espaço</p>
-        <div class="galeria-sitio-scroll" id="galeriaSitio">
-            <div class="galeria-sitio-item reveal-text">
-                <img src="https://lh3.googleusercontent.com/d/1fWiQhma5LZpI5XLm3Z2kyR4GHDfRyAnj" alt="Espaço Verde Perto 1">
+        <div class="galeria-sitio-wrapper">
+            <div class="galeria-sitio-scroll" id="galeriaSitio">
+                <div class="galeria-sitio-item reveal-text">
+                    <img src="https://lh3.googleusercontent.com/d/1fWiQhma5LZpI5XLm3Z2kyR4GHDfRyAnj" alt="Espaço Verde Perto 1">
+                </div>
+                <div class="galeria-sitio-item reveal-text">
+                    <img src="https://lh3.googleusercontent.com/d/1DOMDC0uSpWRWXKbFeb5mI65WqABTABcl" alt="Espaço Verde Perto 2">
+                </div>
+                <div class="galeria-sitio-item reveal-text">
+                    <img src="https://lh3.googleusercontent.com/d/1mfxzPMeTDA0-uKc9dcWJE-D3AF6hF2U3" alt="Espaço Verde Perto 3">
+                </div>
+                <div class="galeria-sitio-item reveal-text">
+                    <img src="https://lh3.googleusercontent.com/d/1mq6LK9PGwGIKsk_WHW7vbP7vETcal8TP" alt="Espaço Verde Perto 4">
+                </div>
+                <div class="galeria-sitio-item reveal-text">
+                    <img src="https://lh3.googleusercontent.com/d/1RfOBgO5leu97yGgk4wsBDs-LQxI7Uamo" alt="Espaço Verde Perto 5">
+                </div>
             </div>
-            <div class="galeria-sitio-item reveal-text">
-                <img src="https://lh3.googleusercontent.com/d/1DOMDC0uSpWRWXKbFeb5mI65WqABTABcl" alt="Espaço Verde Perto 2">
-            </div>
-            <div class="galeria-sitio-item reveal-text">
-                <img src="https://lh3.googleusercontent.com/d/1mfxzPMeTDA0-uKc9dcWJE-D3AF6hF2U3" alt="Espaço Verde Perto 3">
-            </div>
-            <div class="galeria-sitio-item reveal-text">
-                <img src="https://lh3.googleusercontent.com/d/1mq6LK9PGwGIKsk_WHW7vbP7vETcal8TP" alt="Espaço Verde Perto 4">
-            </div>
-            <div class="galeria-sitio-item reveal-text">
-                <img src="https://lh3.googleusercontent.com/d/1RfOBgO5leu97yGgk4wsBDs-LQxI7Uamo" alt="Espaço Verde Perto 5">
-            </div>
+            <!-- Linha orgânica decorativa -->
+            <div class="galeria-organic-line"></div>
         </div>
-        <p style="text-align: center; margin-top: 20px; font-size: 0.75rem; color: var(--text-light); font-style: italic;">
-            Arraste para ver mais fotos
-        </p>
+        <p class="galeria-hint reveal-text">Arraste para ver mais fotos</p>
     </section>
 
     <!-- Save the Date -->
@@ -1624,10 +1774,10 @@
 
         // Contador regressivo inteligente
         function atualizarContador() {
-            const dataCasamento = new Date('2026-06-27T00:00:00');
+            const dataCasamento = new Date('2026-06-27T16:00:00');
             const agora = new Date();
             const hoje = new Date(agora.getFullYear(), agora.getMonth(), agora.getDate());
-            const diferenca = dataCasamento - hoje;
+            const diferenca = dataCasamento - agora;
             
             const contadorEl = document.getElementById('contador');
             
