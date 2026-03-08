@@ -1,0 +1,1583 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Isabel & Calebe — 27.06.2026</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Inter:wght@200;300;400&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --terracota: #B85C48;
+            --terracota-light: #D4856A;
+            --sand: #F7F3EE;
+            --cream: #FDFBF9;
+            --white: #FFFCFA;
+            --text: #4A4A48;
+            --text-light: #8A8A88;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            font-weight: 300;
+            background-color: var(--cream);
+            color: var(--text);
+            line-height: 1.8;
+            letter-spacing: 0.3px;
+            overflow-x: hidden;
+        }
+
+        /* Cortina de entrada */
+        .curtain {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--white);
+            z-index: 9999;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: transform 1.2s cubic-bezier(0.7, 0, 0.3, 1);
+        }
+
+        .curtain.loaded {
+            transform: translateY(-100%);
+        }
+
+        .curtain-text {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1rem;
+            letter-spacing: 4px;
+            color: var(--terracota);
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 0.4; }
+            50% { opacity: 1; }
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-8px); }
+        }
+
+        @keyframes heartbeat {
+            0%, 100% { transform: scale(1); opacity: 0.6; }
+            50% { transform: scale(1.1); opacity: 1; }
+        }
+
+        @keyframes confetti {
+            0% { transform: translateY(-100vh) rotate(0deg); opacity: 1; }
+            100% { transform: translateY(100vh) rotate(720deg); opacity: 0; }
+        }
+
+        .reveal-text {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .reveal-text.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Menu */
+        .menu {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            padding: 25px 50px;
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            z-index: 1000;
+            background: rgba(253, 251, 249, 0.95);
+            backdrop-filter: blur(10px);
+            transform: translateY(-100%);
+            transition: transform 0.4s ease;
+        }
+
+        .menu.visible {
+            transform: translateY(0);
+        }
+
+        .menu a {
+            text-decoration: none;
+            color: var(--text-light);
+            font-size: 0.7rem;
+            letter-spacing: 2.5px;
+            text-transform: uppercase;
+            font-weight: 300;
+            transition: all 0.4s ease;
+            position: relative;
+        }
+
+        .menu a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 1px;
+            background: var(--terracota);
+            transition: width 0.4s ease;
+        }
+
+        .menu a:hover {
+            color: var(--terracota);
+        }
+
+        .menu a:hover::after {
+            width: 100%;
+        }
+
+        /* Hero */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 100px 20px;
+            background: var(--white);
+            position: relative;
+        }
+
+        .hero-names {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(2.2rem, 6vw, 4rem);
+            font-weight: 300;
+            color: var(--text);
+            letter-spacing: 10px;
+            margin-bottom: 20px;
+            line-height: 1.4;
+        }
+
+        .hero-names span {
+            font-style: italic;
+            color: var(--terracota);
+            font-weight: 400;
+            letter-spacing: 12px;
+        }
+
+        .hero-date {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(0.85rem, 1.5vw, 1rem);
+            color: var(--text-light);
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            font-weight: 300;
+            margin-bottom: 80px;
+        }
+
+        .hero-iniciais {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 0.85rem;
+            color: var(--terracota-light);
+            letter-spacing: 6px;
+            font-weight: 300;
+            opacity: 0.7;
+        }
+
+        .hero-iniciais::before,
+        .hero-iniciais::after {
+            content: '—';
+            margin: 0 12px;
+            opacity: 0.3;
+        }
+
+        .contador {
+            position: absolute;
+            bottom: 100px;
+            font-size: 0.65rem;
+            letter-spacing: 2px;
+            color: var(--text-light);
+            text-transform: uppercase;
+            text-align: center;
+        }
+
+        .contador-numero {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.4rem;
+            color: var(--terracota);
+            display: block;
+            margin-top: 8px;
+            font-weight: 400;
+            min-height: 1.4em;
+        }
+
+        .contador-hoje {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.8rem;
+            color: var(--terracota);
+            font-style: italic;
+            font-weight: 400;
+            display: block;
+            margin-top: 8px;
+            animation: heartbeat 2s ease-in-out infinite;
+        }
+
+        .scroll-hint {
+            position: absolute;
+            bottom: 50px;
+            left: 50%;
+            transform: translateX(-50%);
+            animation: float 3s ease-in-out infinite;
+        }
+
+        .scroll-hint svg {
+            width: 24px;
+            height: 24px;
+            stroke: var(--terracota-light);
+            fill: none;
+            stroke-width: 1;
+            opacity: 0.6;
+        }
+
+        /* Convite */
+        .convite-section {
+            padding: 120px 20px 80px;
+            max-width: 650px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .convite-texto {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(1.2rem, 2.5vw, 1.5rem);
+            font-weight: 300;
+            line-height: 2.4;
+            color: var(--text);
+            font-style: italic;
+            margin-bottom: 50px;
+            letter-spacing: 0.5px;
+        }
+
+        .convite-assinatura {
+            font-size: 0.75rem;
+            color: var(--text-light);
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            font-weight: 300;
+        }
+
+        /* Versículo */
+        .versiculo-section {
+            padding: 60px 20px;
+            text-align: center;
+            max-width: 600px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        .versiculo-section::before {
+            content: '“';
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 6rem;
+            color: var(--terracota);
+            opacity: 0.08;
+            position: absolute;
+            top: -20px;
+            left: 50%;
+            transform: translateX(-50%);
+            line-height: 1;
+        }
+
+        .versiculo-texto {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.1rem;
+            font-style: italic;
+            color: var(--text-light);
+            line-height: 2;
+            font-weight: 300;
+            position: relative;
+            z-index: 1;
+        }
+
+        .versiculo-ref {
+            font-size: 0.7rem;
+            color: var(--terracota);
+            letter-spacing: 2px;
+            margin-top: 20px;
+            text-transform: uppercase;
+        }
+
+        /* Linha do tempo vertical */
+        .timeline-section {
+            padding: 100px 20px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .section-label {
+            text-align: center;
+            font-size: 0.65rem;
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            color: var(--terracota);
+            margin-bottom: 80px;
+            font-weight: 400;
+        }
+
+        .timeline-vertical {
+            position: relative;
+            padding: 20px 0;
+        }
+
+        .timeline-vertical::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 1px;
+            height: 100%;
+            background: linear-gradient(to bottom, transparent, var(--terracota-light) 10%, var(--terracota-light) 90%, transparent);
+            opacity: 0.4;
+        }
+
+        .timeline-item-vertical {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 80px;
+            position: relative;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .timeline-item-vertical.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .timeline-item-vertical:last-child {
+            margin-bottom: 0;
+        }
+
+        .timeline-content {
+            background: var(--white);
+            padding: 35px 45px;
+            border-radius: 12px;
+            box-shadow: 0 5px 25px rgba(0,0,0,0.04);
+            max-width: 320px;
+            text-align: center;
+            position: relative;
+            border: 1px solid rgba(184, 92, 72, 0.08);
+            transition: all 0.4s ease;
+        }
+
+        .timeline-content:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 40px rgba(0,0,0,0.08);
+        }
+
+        .timeline-content::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            width: 20px;
+            height: 1px;
+            background: var(--terracota-light);
+            opacity: 0.5;
+        }
+
+        .timeline-item-vertical:nth-child(odd) .timeline-content {
+            margin-right: 60px;
+        }
+
+        .timeline-item-vertical:nth-child(odd) .timeline-content::before {
+            right: -20px;
+        }
+
+        .timeline-item-vertical:nth-child(even) .timeline-content {
+            margin-left: 60px;
+        }
+
+        .timeline-item-vertical:nth-child(even) .timeline-content::before {
+            left: -20px;
+        }
+
+        .timeline-dot-vertical {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 12px;
+            height: 12px;
+            background: var(--terracota);
+            border-radius: 50%;
+            border: 3px solid var(--cream);
+            box-shadow: 0 0 0 1px var(--terracota-light);
+            z-index: 2;
+            transition: all 0.4s ease;
+        }
+
+        .timeline-item-vertical:hover .timeline-dot-vertical {
+            transform: translateX(-50%) scale(1.3);
+            box-shadow: 0 0 0 2px var(--terracota-light);
+        }
+
+        .timeline-data-vertical {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 0.85rem;
+            color: var(--terracota);
+            margin-bottom: 8px;
+            font-weight: 400;
+            letter-spacing: 1px;
+        }
+
+        .timeline-titulo-vertical {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.4rem;
+            color: var(--text);
+            margin-bottom: 10px;
+            font-weight: 400;
+            font-style: italic;
+        }
+
+        .timeline-desc-vertical {
+            font-size: 0.8rem;
+            color: var(--text-light);
+            line-height: 1.6;
+            font-weight: 300;
+        }
+
+        /* Fotos normais - SIMPLES */
+        .fotos-section {
+            padding: 100px 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 30px;
+            flex-wrap: wrap;
+            background: linear-gradient(to bottom, var(--cream), var(--sand));
+        }
+
+        .foto-item {
+            width: 280px;
+            height: 350px;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .foto-item:hover {
+            transform: translateY(-5px);
+        }
+
+        .foto-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* Local + Mapa */
+        .local-section {
+            padding: 100px 20px;
+            background: var(--sand);
+        }
+
+        .local-content {
+            max-width: 900px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .local-titulo {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(1.6rem, 3vw, 2rem);
+            font-weight: 300;
+            color: var(--text);
+            margin-bottom: 30px;
+            letter-spacing: 1px;
+        }
+
+        .local-texto {
+            max-width: 550px;
+            margin: 0 auto 40px;
+            font-size: 0.95rem;
+            line-height: 2.2;
+            color: var(--text-light);
+            font-weight: 300;
+        }
+
+        .local-info {
+            margin-bottom: 50px;
+        }
+
+        .local-subtitulo {
+            font-size: 0.8rem;
+            color: var(--text-light);
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 10px;
+        }
+
+        .local-nome {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.5rem;
+            color: var(--terracota);
+            margin-bottom: 8px;
+            font-weight: 400;
+            font-style: italic;
+        }
+
+        .local-endereco {
+            font-size: 0.85rem;
+            color: var(--text-light);
+            letter-spacing: 1px;
+        }
+
+        .mapa-container {
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 15px 50px rgba(0,0,0,0.08);
+            background: white;
+            padding: 8px;
+            margin-bottom: 30px;
+        }
+
+        .mapa-embed {
+            width: 100%;
+            height: 450px;
+            border: none;
+            border-radius: 8px;
+        }
+
+        /* Botões de transporte */
+        .transporte-btns {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            margin-bottom: 50px;
+            flex-wrap: wrap;
+        }
+
+        .transporte-btn-minimal {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+            color: var(--text-light);
+            transition: all 0.4s ease;
+            padding: 20px;
+            border-radius: 16px;
+            background: var(--white);
+            border: 1px solid rgba(184, 92, 72, 0.1);
+            min-width: 140px;
+        }
+
+        .transporte-btn-minimal:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+            border-color: rgba(184, 92, 72, 0.3);
+        }
+
+        .transporte-btn-minimal:hover .transporte-label {
+            color: var(--terracota);
+        }
+
+        .transporte-icone {
+            width: 48px;
+            height: 48px;
+            border-radius: 12px;
+            overflow: hidden;
+            background: var(--sand);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .transporte-icone img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            padding: 4px;
+        }
+
+        .transporte-label {
+            font-size: 0.7rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            font-weight: 400;
+            transition: color 0.3s ease;
+        }
+
+        /* Galeria do Sítio - SIMPLES */
+        .galeria-sitio-section {
+            padding: 60px 20px;
+            background: var(--sand);
+            overflow: hidden;
+        }
+
+        .galeria-sitio-scroll {
+            display: flex;
+            gap: 20px;
+            overflow-x: auto;
+            scroll-snap-type: x mandatory;
+            scrollbar-width: none;
+            -ms-overflow-style: none;
+            padding: 20px 0;
+            cursor: grab;
+        }
+
+        .galeria-sitio-scroll::-webkit-scrollbar {
+            display: none;
+        }
+
+        .galeria-sitio-item {
+            flex: 0 0 auto;
+            width: 300px;
+            height: 400px;
+            border-radius: 12px;
+            overflow: hidden;
+            scroll-snap-align: center;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            background: var(--terracota-light);
+        }
+
+        .galeria-sitio-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* Save the Date */
+        .save-date-section {
+            padding: 120px 20px;
+            background: linear-gradient(to bottom, var(--cream), var(--white));
+            text-align: center;
+        }
+
+        .calendario-container {
+            display: inline-block;
+            background: var(--white);
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.06);
+            border: 1px solid rgba(184, 92, 72, 0.1);
+            position: relative;
+        }
+
+        .calendario-mes {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.5rem;
+            color: var(--terracota);
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            margin-bottom: 25px;
+            font-weight: 400;
+        }
+
+        .calendario-grid {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 10px;
+            margin-bottom: 10px;
+        }
+
+        .calendario-dia-semana {
+            font-size: 0.65rem;
+            color: var(--text-light);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            padding: 10px 5px;
+            font-weight: 400;
+        }
+
+        .calendario-dia {
+            width: 45px;
+            height: 45px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.9rem;
+            color: var(--text);
+            border-radius: 50%;
+            transition: all 0.3s ease;
+            font-weight: 300;
+        }
+
+        .calendario-dia.outro-mes {
+            color: var(--text-light);
+            opacity: 0.4;
+        }
+
+        .calendario-dia.especial {
+            background: var(--terracota);
+            color: white;
+            font-weight: 400;
+            transform: scale(1.1);
+            box-shadow: 0 4px 15px rgba(184, 92, 72, 0.3);
+            position: relative;
+        }
+
+        .calendario-dia.especial::after {
+            content: '♥';
+            position: absolute;
+            top: -8px;
+            right: -5px;
+            font-size: 0.7rem;
+            color: var(--terracota);
+            animation: heartbeat 1.5s ease-in-out infinite;
+        }
+
+        .save-date-texto {
+            margin-top: 40px;
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.3rem;
+            color: var(--text);
+            font-style: italic;
+            font-weight: 300;
+        }
+
+        /* Manual do Convidado */
+        .manual-section {
+            padding: 120px 20px;
+            background: linear-gradient(to bottom, var(--white), var(--cream));
+            position: relative;
+        }
+
+        .manual-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 1px;
+            height: 80px;
+            background: linear-gradient(to bottom, transparent, var(--terracota-light));
+            opacity: 0.4;
+        }
+
+        .manual-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .manual-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            margin-top: 60px;
+        }
+
+        .manual-card {
+            background: var(--white);
+            padding: 40px 30px;
+            border-radius: 16px;
+            text-align: center;
+            border: 1px solid rgba(184, 92, 72, 0.08);
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .manual-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(to right, transparent, var(--terracota-light), transparent);
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+
+        .manual-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.06);
+        }
+
+        .manual-card:hover::before {
+            opacity: 1;
+        }
+
+        .manual-icone {
+            font-size: 2rem;
+            margin-bottom: 20px;
+            opacity: 0.8;
+        }
+
+        .manual-titulo {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.2rem;
+            color: var(--text);
+            margin-bottom: 15px;
+            font-weight: 400;
+            font-style: italic;
+        }
+
+        .manual-texto {
+            font-size: 0.85rem;
+            color: var(--text-light);
+            line-height: 1.8;
+            font-weight: 300;
+        }
+
+        /* Presentes */
+        .presentes-section {
+            padding: 120px 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 60px;
+            max-width: 1000px;
+            margin: 0 auto;
+            flex-wrap: wrap;
+        }
+
+        .presentes-foto {
+            width: 300px;
+            height: 400px;
+            overflow: hidden;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.1);
+            border-radius: 8px;
+        }
+
+        .presentes-foto img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .presentes-content {
+            max-width: 400px;
+            text-align: left;
+        }
+
+        .presentes-texto {
+            font-size: 0.9rem;
+            line-height: 2;
+            color: var(--text-light);
+            font-weight: 300;
+            margin-bottom: 30px;
+        }
+
+        .btn-elegante {
+            display: inline-block;
+            padding: 14px 35px;
+            background: transparent;
+            color: var(--terracota);
+            text-decoration: none;
+            font-size: 0.7rem;
+            letter-spacing: 2.5px;
+            text-transform: uppercase;
+            font-weight: 400;
+            border: 1px solid rgba(184, 92, 72, 0.3);
+            border-radius: 30px;
+            transition: all 0.4s ease;
+            cursor: pointer;
+        }
+
+        .btn-elegante:hover {
+            background: var(--terracota);
+            color: white;
+            border-color: var(--terracota);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(184, 92, 72, 0.15);
+        }
+
+        /* Confirmação */
+        .confirmacao-section {
+            padding: 140px 20px;
+            text-align: center;
+            background: linear-gradient(to bottom, var(--white), var(--sand));
+            position: relative;
+        }
+
+        .confirmacao-section::before {
+            content: '';
+            position: absolute;
+            top: 50px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 1px;
+            height: 60px;
+            background: linear-gradient(to bottom, var(--terracota-light), transparent);
+            opacity: 0.4;
+        }
+
+        .confirmacao-texto {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.2rem;
+            color: var(--text);
+            margin-bottom: 15px;
+            font-weight: 300;
+            font-style: italic;
+        }
+
+        .confirmacao-prazo {
+            font-size: 0.75rem;
+            color: var(--text-light);
+            letter-spacing: 1px;
+            margin-bottom: 50px;
+        }
+
+        .btn-confirmar {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            padding: 18px 45px;
+            background: var(--terracota);
+            color: white;
+            text-decoration: none;
+            font-size: 0.75rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            font-weight: 400;
+            border-radius: 30px;
+            transition: all 0.4s ease;
+            box-shadow: 0 4px 20px rgba(184, 92, 72, 0.2);
+        }
+
+        .btn-confirmar:hover {
+            background: #A0503D;
+            transform: translateY(-3px);
+            box-shadow: 0 8px 30px rgba(184, 92, 72, 0.3);
+        }
+
+        /* Footer */
+        footer {
+            padding: 80px 20px;
+            text-align: center;
+            background: var(--text);
+            color: rgba(255,255,255,0.4);
+            position: relative;
+        }
+
+        .footer-heart {
+            position: absolute;
+            top: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 30px;
+            height: 30px;
+            background: var(--text);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .footer-heart::before {
+            content: '♥';
+            color: var(--terracota);
+            font-size: 14px;
+            animation: heartbeat 2s ease-in-out infinite;
+        }
+
+        .footer-iniciais {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.1rem;
+            color: rgba(255,255,255,0.7);
+            letter-spacing: 4px;
+            margin-bottom: 10px;
+        }
+
+        .footer-data {
+            font-size: 0.7rem;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+        }
+
+        /* Efeito especial para o dia do casamento */
+        .confetti {
+            position: fixed;
+            width: 10px;
+            height: 10px;
+            background: var(--terracota);
+            position: absolute;
+            animation: confetti 3s linear infinite;
+            opacity: 0;
+            pointer-events: none;
+            z-index: 9998;
+        }
+
+        /* Responsivo */
+        @media (max-width: 768px) {
+            .menu {
+                padding: 15px;
+                gap: 15px;
+                flex-wrap: wrap;
+            }
+
+            .menu a {
+                font-size: 0.6rem;
+                letter-spacing: 2px;
+            }
+
+            .hero-names {
+                letter-spacing: 5px;
+            }
+
+            .timeline-vertical::before {
+                left: 30px;
+            }
+
+            .timeline-item-vertical {
+                justify-content: flex-start;
+                padding-left: 60px;
+            }
+
+            .timeline-item-vertical:nth-child(odd) .timeline-content,
+            .timeline-item-vertical:nth-child(even) .timeline-content {
+                margin: 0;
+                max-width: 100%;
+            }
+
+            .timeline-item-vertical:nth-child(odd) .timeline-content::before,
+            .timeline-item-vertical:nth-child(even) .timeline-content::before {
+                left: -35px;
+                right: auto;
+                width: 35px;
+            }
+
+            .timeline-dot-vertical {
+                left: 30px;
+            }
+
+            .foto-item {
+                width: 240px;
+                height: 300px;
+            }
+
+            .calendario-container {
+                padding: 25px;
+            }
+
+            .calendario-dia {
+                width: 38px;
+                height: 38px;
+                font-size: 0.8rem;
+            }
+
+            .galeria-sitio-item {
+                width: 260px;
+                height: 350px;
+            }
+
+            .presentes-section {
+                flex-direction: column-reverse;
+                text-align: center;
+            }
+
+            .presentes-content {
+                text-align: center;
+            }
+
+            .mapa-embed {
+                height: 300px;
+            }
+
+            .transporte-btns {
+                gap: 20px;
+            }
+
+            .transporte-btn-minimal {
+                min-width: 120px;
+                padding: 15px;
+            }
+
+            .manual-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Cortina -->
+    <div class="curtain" id="curtain">
+        <span class="curtain-text">Isabel & Calebe</span>
+    </div>
+
+    <!-- Menu -->
+    <nav class="menu" id="menu">
+        <a href="#historia">Nossa História</a>
+        <a href="#local">Local</a>
+        <a href="#manual">Manual</a>
+        <a href="#presentes">Presentes</a>
+        <a href="#confirmacao">Confirme sua Presença</a>
+    </nav>
+
+    <!-- Hero -->
+    <section class="hero">
+        <h1 class="hero-names reveal-text">Isabel <span>&</span> Calebe</h1>
+        <p class="hero-date reveal-text">27 de Junho de 2026</p>
+        <p class="hero-iniciais reveal-text">I &nbsp;&amp;&nbsp; C</p>
+        
+        <div class="contador reveal-text">
+            Faltam
+            <span class="contador-numero" id="contador">calculando...</span>
+        </div>
+
+        <div class="scroll-hint reveal-text">
+            <svg viewBox="0 0 24 24"><path d="M12 5v14M19 12l-7 7-7-7"/></svg>
+        </div>
+    </section>
+
+    <!-- Convite -->
+    <section class="convite-section" id="historia">
+        <p class="convite-texto reveal-text">
+            Há momentos na vida que nascem do encontro de duas almas.<br>
+            Decidimos caminhar juntos, construindo uma história<br>
+            escrita com amor, respeito e alegria.<br><br>
+            Neste dia especial, queremos celebrar não apenas nossa união,<br>
+            mas a bênção de tê-los ao nosso lado,<br>
+            testemunhando o início deste capítulo eterno.
+        </p>
+        <p class="convite-assinatura reveal-text">Com carinho, Isabel & Calebe</p>
+    </section>
+
+    <!-- Versículo -->
+    <section class="versiculo-section">
+        <p class="versiculo-texto reveal-text">
+            "O amor é paciente, o amor é bondoso.<br>
+            Não inveja, não se vangloria, não se orgulha.<br>
+            Tudo sofre, tudo crê, tudo espera, tudo suporta."
+        </p>
+        <p class="versiculo-ref reveal-text">1 Coríntios 13:4-7</p>
+    </section>
+
+    <!-- Linha do tempo vertical -->
+    <section class="timeline-section">
+        <p class="section-label reveal-text">Nossa História</p>
+        <div class="timeline-vertical">
+            <div class="timeline-item-vertical reveal-text">
+                <div class="timeline-dot-vertical"></div>
+                <div class="timeline-content">
+                    <div class="timeline-data-vertical">01 de Novembro de 2021</div>
+                    <div class="timeline-titulo-vertical">A Primeira Mensagem</div>
+                    <div class="timeline-desc-vertical">Quando duas palavras deram início a tudo</div>
+                </div>
+            </div>
+            <div class="timeline-item-vertical reveal-text">
+                <div class="timeline-dot-vertical"></div>
+                <div class="timeline-content">
+                    <div class="timeline-data-vertical">26 de Junho de 2022</div>
+                    <div class="timeline-titulo-vertical">O Pedido de Namoro</div>
+                    <div class="timeline-desc-vertical">O "sim" que mudou nossas vidas</div>
+                </div>
+            </div>
+            <div class="timeline-item-vertical reveal-text">
+                <div class="timeline-dot-vertical"></div>
+                <div class="timeline-content">
+                    <div class="timeline-data-vertical">13 de Dezembro de 2024</div>
+                    <div class="timeline-titulo-vertical">O Pedido de Casamento</div>
+                    <div class="timeline-desc-vertical">Uma promessa para toda a eternidade</div>
+                </div>
+            </div>
+            <div class="timeline-item-vertical reveal-text">
+                <div class="timeline-dot-vertical"></div>
+                <div class="timeline-content">
+                    <div class="timeline-data-vertical">27 de Junho de 2026</div>
+                    <div class="timeline-titulo-vertical">O Grande Dia</div>
+                    <div class="timeline-desc-vertical">A celebração do nosso amor no Espaço Verde Perto</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Fotos normais (antigas polaroids) -->
+    <section class="fotos-section">
+        <div class="foto-item reveal-text">
+            <img src="https://lh3.googleusercontent.com/d/1_r4LFA_0r7LmEaVZui4jQWb5weMfPvSi" alt="Pré Wedding 1">
+        </div>
+        <div class="foto-item reveal-text">
+            <img src="https://lh3.googleusercontent.com/d/1RkycrWM8ZRq_BUH3edcwUVcqmmhuN4Wd" alt="Pré Wedding 2">
+        </div>
+        <div class="foto-item reveal-text">
+            <img src="https://lh3.googleusercontent.com/d/11c5iNEv9sX0N1kj4Kzx-B3rXKoPFCFmD" alt="Pré Wedding 3">
+        </div>
+    </section>
+
+    <!-- Local + Mapa -->
+    <section class="local-section" id="local">
+        <div class="local-content">
+            <p class="section-label reveal-text">O Grande Dia</p>
+            <h2 class="local-titulo reveal-text">Um Dia Inesquecível</h2>
+            <p class="local-texto reveal-text">
+                Preparamos com muito carinho cada detalhe desta celebração.<br>
+                Escolhemos um lugar especial em Pedro Leopoldo, cercado por natureza<br>
+                e com uma energia única, para compartilharmos este momento<br>
+                tão significativo com quem amamos.
+            </p>
+            <div class="local-info reveal-text">
+                <p class="local-subtitulo">Sítio</p>
+                <p class="local-nome">Espaço Verde Perto</p>
+                <p class="local-endereco">R. dos Lírios, 317 — Quinta das Palmeiras<br>Pedro Leopoldo, MG — 33600-000</p>
+            </div>
+            <div class="mapa-container reveal-text">
+                <iframe 
+                    class="mapa-embed"
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3750.0!2d-44.05!3d-19.58!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMTnCsDM0JzQ4LjAiUyA0NMKwMDMnMDAuMCJX!5e0!3m2!1spt-BR!2sbr!4v1600000000000!5m2!1spt-BR!2sbr"
+                    allowfullscreen=""
+                    loading="lazy">
+                </iframe>
+            </div>
+            
+            <!-- Botões de Transporte -->
+            <div class="transporte-btns reveal-text">
+                <a href="https://m.uber.com/ul/?action=setPickup&dropoff[latitude]=-19.6167&dropoff[longitude]=-44.05&dropoff[nickname]=Espaço%20Verde%20Perto&dropoff[formatted_address]=R.%20dos%20L%C3%ADrios%2C%20317%20-%20Quinta%20das%20Palmeiras%2C%20Pedro%20Leopoldo%20-%20MG%2C%2033600-000" 
+                   class="transporte-btn-minimal" target="_blank">
+                    <div class="transporte-icone">
+                        <img src="https://lh3.googleusercontent.com/d/1eLOtue7KjffR8G_Ry1dCiRbxxuMmnNMc" alt="Uber">
+                    </div>
+                    <span class="transporte-label">Chamar Uber</span>
+                </a>
+                <a href="https://waze.com/ul?q=R.%20dos%20L%C3%ADrios%2C%20317%20-%20Quinta%20das%20Palmeiras%2C%20Pedro%20Leopoldo%20-%20MG%2C%2033600-000&navigate=yes" 
+                   class="transporte-btn-minimal" target="_blank">
+                    <div class="transporte-icone">
+                        <img src="https://lh3.googleusercontent.com/d/1AsxLK-NaWcD599t2UQkmfwuJKcyZ_vxP" alt="Waze">
+                    </div>
+                    <span class="transporte-label">Abrir no Waze</span>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Galeria do Sítio - FOTOS NORMAIS -->
+    <section class="galeria-sitio-section">
+        <p class="section-label reveal-text" style="margin-bottom: 30px; color: var(--text-light);">O Espaço</p>
+        <div class="galeria-sitio-scroll" id="galeriaSitio">
+            <div class="galeria-sitio-item reveal-text">
+                <img src="https://lh3.googleusercontent.com/d/1fWiQhma5LZpI5XLm3Z2kyR4GHDfRyAnj" alt="Espaço Verde Perto 1">
+            </div>
+            <div class="galeria-sitio-item reveal-text">
+                <img src="https://lh3.googleusercontent.com/d/1DOMDC0uSpWRWXKbFeb5mI65WqABTABcl" alt="Espaço Verde Perto 2">
+            </div>
+            <div class="galeria-sitio-item reveal-text">
+                <img src="https://lh3.googleusercontent.com/d/1mfxzPMeTDA0-uKc9dcWJE-D3AF6hF2U3" alt="Espaço Verde Perto 3">
+            </div>
+            <div class="galeria-sitio-item reveal-text">
+                <img src="https://lh3.googleusercontent.com/d/1mq6LK9PGwGIKsk_WHW7vbP7vETcal8TP" alt="Espaço Verde Perto 4">
+            </div>
+            <div class="galeria-sitio-item reveal-text">
+                <img src="https://lh3.googleusercontent.com/d/1RfOBgO5leu97yGgk4wsBDs-LQxI7Uamo" alt="Espaço Verde Perto 5">
+            </div>
+        </div>
+        <p style="text-align: center; margin-top: 20px; font-size: 0.75rem; color: var(--text-light); font-style: italic;">
+            Arraste para ver mais fotos
+        </p>
+    </section>
+
+    <!-- Save the Date -->
+    <section class="save-date-section" id="save-date">
+        <p class="section-label reveal-text" style="margin-bottom: 40px;">Save the Date</p>
+        <div class="calendario-container reveal-text">
+            <div class="calendario-mes">Junho 2026</div>
+            <div class="calendario-grid">
+                <div class="calendario-dia-semana">Dom</div>
+                <div class="calendario-dia-semana">Seg</div>
+                <div class="calendario-dia-semana">Ter</div>
+                <div class="calendario-dia-semana">Qua</div>
+                <div class="calendario-dia-semana">Qui</div>
+                <div class="calendario-dia-semana">Sex</div>
+                <div class="calendario-dia-semana">Sáb</div>
+                
+                <div class="calendario-dia outro-mes">31</div>
+                <div class="calendario-dia">1</div>
+                <div class="calendario-dia">2</div>
+                <div class="calendario-dia">3</div>
+                <div class="calendario-dia">4</div>
+                <div class="calendario-dia">5</div>
+                <div class="calendario-dia">6</div>
+                
+                <div class="calendario-dia">7</div>
+                <div class="calendario-dia">8</div>
+                <div class="calendario-dia">9</div>
+                <div class="calendario-dia">10</div>
+                <div class="calendario-dia">11</div>
+                <div class="calendario-dia">12</div>
+                <div class="calendario-dia">13</div>
+                
+                <div class="calendario-dia">14</div>
+                <div class="calendario-dia">15</div>
+                <div class="calendario-dia">16</div>
+                <div class="calendario-dia">17</div>
+                <div class="calendario-dia">18</div>
+                <div class="calendario-dia">19</div>
+                <div class="calendario-dia">20</div>
+                
+                <div class="calendario-dia">21</div>
+                <div class="calendario-dia">22</div>
+                <div class="calendario-dia">23</div>
+                <div class="calendario-dia">24</div>
+                <div class="calendario-dia">25</div>
+                <div class="calendario-dia">26</div>
+                <div class="calendario-dia especial">27</div>
+                
+                <div class="calendario-dia">28</div>
+                <div class="calendario-dia">29</div>
+                <div class="calendario-dia">30</div>
+                <div class="calendario-dia outro-mes">1</div>
+                <div class="calendario-dia outro-mes">2</div>
+                <div class="calendario-dia outro-mes">3</div>
+                <div class="calendario-dia outro-mes">4</div>
+            </div>
+        </div>
+        <p class="save-date-texto reveal-text">Reserve esta data em seu coração</p>
+    </section>
+
+    <!-- Manual do Convidado -->
+    <section class="manual-section" id="manual">
+        <div class="manual-container">
+            <p class="section-label reveal-text">Manual do Convidado</p>
+            <h2 class="local-titulo reveal-text" style="text-align: center;">Dicas para uma Experiência Perfeita</h2>
+            
+            <div class="manual-grid">
+                <div class="manual-card reveal-text">
+                    <div class="manual-icone">✓</div>
+                    <h3 class="manual-titulo">Confirme sua Presença</h3>
+                    <p class="manual-texto">Sua confirmação é essencial para acessar o local da festa. O espaço é privado e só permite entrada mediante confirmação prévia.</p>
+                </div>
+                
+                <div class="manual-card reveal-text">
+                    <div class="manual-icone">🕐</div>
+                    <h3 class="manual-titulo">Chegue com Antecedência</h3>
+                    <p class="manual-texto">Sugerimos chegar com pelo menos 30 minutos de antecedência. Assim você aproveita o momento sem pressa e não perde nenhum detalhe especial.</p>
+                </div>
+                
+                <div class="manual-card reveal-text">
+                    <div class="manual-icone">📸</div>
+                    <h3 class="manual-titulo">Tire Bastante Fotos</h3>
+                    <p class="manual-texto">Queremos ver o dia pelos olhos de vocês! Capture os momentos, as emoções e compartilhe conosco depois. Cada registro será um tesouro.</p>
+                </div>
+                
+                <div class="manual-card reveal-text">
+                    <div class="manual-icone">👗</div>
+                    <h3 class="manual-titulo">Vista-se Confortável</h3>
+                    <p class="manual-texto">O evento será ao ar livre, na grama. Escolha sapatos confortáveis e roupas que permitam aproveitar a festa com tranquilidade.</p>
+                </div>
+                
+                <div class="manual-card reveal-text">
+                    <div class="manual-icone">🌿</div>
+                    <h3 class="manual-titulo">Respeite a Natureza</h3>
+                    <p class="manual-texto">O Espaço Verde Perto é um lugar mágico. Ajude-nos a preservá-lo: use copos descartáveis com consciência e aproveite o verde ao redor.</p>
+                </div>
+                
+                <div class="manual-card reveal-text">
+                    <div class="manual-icone">💃</div>
+                    <h3 class="manual-titulo">Prepare-se para Dançar</h3>
+                    <p class="manual-texto">Teremos muita música, alegria e celebração. Traga sua energia positiva e disposição para curtir cada momento ao lado da gente!</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Presentes -->
+    <section class="presentes-section" id="presentes">
+        <div class="presentes-foto reveal-text">
+            <img src="https://lh3.googleusercontent.com/d/10snaaqSPdhwcZ20QMP45OzZylxYwGvo3" alt="Presentes">
+        </div>
+        <div class="presentes-content reveal-text">
+            <p class="section-label" style="text-align: left; margin-bottom: 30px;">Lista de Presentes</p>
+            <p class="presentes-texto">
+                Sua presença é nosso maior presente.<br>
+                Mas se desejar nos abençoar de outra forma,<br>
+                separamos algumas sugestões que serão<br>
+                muito especiais para nós.
+            </p>
+            <a href="#" class="btn-elegante">Ver Sugestões</a>
+        </div>
+    </section>
+
+    <!-- Confirmação -->
+    <section class="confirmacao-section" id="confirmacao">
+        <p class="section-label reveal-text">Confirme sua Presença</p>
+        <p class="confirmacao-texto reveal-text">
+            Contamos com você para tornar este dia ainda mais especial.
+        </p>
+        <p class="confirmacao-prazo reveal-text">Por favor, confirme até 01 de junho de 2026</p>
+        <a href="https://wa.me/5531988602528?text=Oi%20Isabel%20e%20Calebe!%20💍%0A%0APassando%20para%20confirmar%20minha%20presença%20no%20casamento%20de%20vocês.%20Mal%20posso%20esperar%20para%20celebrar%20esse%20dia%20tão%20especial%20ao%20lado%20de%20vocês!%0A%0ACom%20carinho%20❤️" 
+           class="btn-confirmar reveal-text" target="_blank">
+            <span>Confirme sua presença</span>
+        </a>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-heart"></div>
+        <p class="footer-iniciais">I & C</p>
+        <p class="footer-data">27 . 06 . 2026</p>
+    </footer>
+
+    <script>
+        // Cortina de entrada
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                document.getElementById('curtain').classList.add('loaded');
+            }, 1500);
+        });
+
+        // Menu inteligente
+        let lastScroll = 0;
+        const menu = document.getElementById('menu');
+        
+        window.addEventListener('scroll', () => {
+            const currentScroll = window.pageYOffset;
+            
+            if (currentScroll > 100) {
+                if (currentScroll < lastScroll) {
+                    menu.classList.add('visible');
+                } else {
+                    menu.classList.remove('visible');
+                }
+            } else {
+                menu.classList.remove('visible');
+            }
+            lastScroll = currentScroll;
+        });
+
+        // Animações de revelação de texto
+        const revealTexts = document.querySelectorAll('.reveal-text');
+        const textObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+
+        revealTexts.forEach(el => textObserver.observe(el));
+
+        // Animação específica para timeline vertical
+        const timelineItems = document.querySelectorAll('.timeline-item-vertical');
+        const timelineObserver = new IntersectionObserver((entries) => {
+            entries.forEach((entry, index) => {
+                if (entry.isIntersecting) {
+                    setTimeout(() => {
+                        entry.target.classList.add('visible');
+                    }, index * 200);
+                }
+            });
+        }, { threshold: 0.2 });
+
+        timelineItems.forEach(el => timelineObserver.observe(el));
+
+        // Contador regressivo inteligente
+        function atualizarContador() {
+            const dataCasamento = new Date('2026-06-27T00:00:00');
+            const agora = new Date();
+            const hoje = new Date(agora.getFullYear(), agora.getMonth(), agora.getDate());
+            const diferenca = dataCasamento - hoje;
+            
+            const contadorEl = document.getElementById('contador');
+            
+            if (diferenca <= 0) {
+                const diffHoras = agora - dataCasamento;
+                const horasPassadas = Math.floor(diffHoras / (1000 * 60 * 60));
+                
+                if (horasPassadas < 24) {
+                    contadorEl.innerHTML = '<span class="contador-hoje">✨ O Grande Dia é Hoje! ✨</span>';
+                    criarConfetti();
+                } else {
+                    contadorEl.innerHTML = '<span style="font-size: 1rem; font-style: italic;">Um dia inesquecível</span>';
+                }
+            } else {
+                const dias = Math.floor(diferenca / (1000 * 60 * 60 * 24));
+                const meses = Math.floor(dias / 30);
+                const diasRestantes = dias % 30;
+                
+                let texto = '';
+                if (meses > 0) {
+                    if (diasRestantes === 0) {
+                        texto = `${meses} ${meses === 1 ? 'mês' : 'meses'}`;
+                    } else {
+                        texto = `${meses} ${meses === 1 ? 'mês' : 'meses'} e ${diasRestantes} ${diasRestantes === 1 ? 'dia' : 'dias'}`;
+                    }
+                } else {
+                    texto = `${dias} ${dias === 1 ? 'dia' : 'dias'}`;
+                }
+                
+                contadorEl.textContent = texto;
+            }
+        }
+        
+        function criarConfetti() {
+            const colors = ['#B85C48', '#D4856A', '#F7F3EE', '#FDFBF9'];
+            for (let i = 0; i < 50; i++) {
+                setTimeout(() => {
+                    const confetti = document.createElement('div');
+                    confetti.className = 'confetti';
+                    confetti.style.left = Math.random() * 100 + 'vw';
+                    confetti.style.background = colors[Math.floor(Math.random() * colors.length)];
+                    confetti.style.animationDuration = (Math.random() * 2 + 2) + 's';
+                    confetti.style.animationDelay = Math.random() * 2 + 's';
+                    document.body.appendChild(confetti);
+                    setTimeout(() => confetti.remove(), 5000);
+                }, i * 100);
+            }
+        }
+        
+        atualizarContador();
+        setInterval(atualizarContador, 60000);
+
+        // Galeria do sítio - Drag scroll
+        const galeriaScroll = document.getElementById('galeriaSitio');
+        let isDown = false;
+        let startX;
+        let scrollLeft;
+
+        galeriaScroll.addEventListener('mousedown', (e) => {
+            isDown = true;
+            galeriaScroll.style.cursor = 'grabbing';
+            startX = e.pageX - galeriaScroll.offsetLeft;
+            scrollLeft = galeriaScroll.scrollLeft;
+        });
+
+        galeriaScroll.addEventListener('mouseleave', () => {
+            isDown = false;
+            galeriaScroll.style.cursor = 'grab';
+        });
+
+        galeriaScroll.addEventListener('mouseup', () => {
+            isDown = false;
+            galeriaScroll.style.cursor = 'grab';
+        });
+
+        galeriaScroll.addEventListener('mousemove', (e) => {
+            if (!isDown) return;
+            e.preventDefault();
+            const x = e.pageX - galeriaScroll.offsetLeft;
+            const walk = (x - startX) * 2;
+            galeriaScroll.scrollLeft = scrollLeft - walk;
+        });
+
+        // Smooth scroll
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+    </script>
+
+</body>
+</html> ‌‍
