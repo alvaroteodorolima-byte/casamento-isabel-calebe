@@ -175,7 +175,7 @@
             justify-content: center;
             align-items: center;
             text-align: center;
-            padding: 100px 20px;
+            padding: 80px 20px 60px;
             background: var(--white);
             position: relative;
         }
@@ -186,7 +186,7 @@
             font-weight: 300;
             color: var(--text);
             letter-spacing: 10px;
-            margin-bottom: 20px;
+            margin-bottom: 16px;
             line-height: 1.4;
         }
 
@@ -204,7 +204,16 @@
             letter-spacing: 4px;
             text-transform: uppercase;
             font-weight: 300;
-            margin-bottom: 80px;
+            margin-bottom: 6px;
+        }
+
+        .hero-horario {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(0.78rem, 1.3vw, 0.9rem);
+            color: var(--terracota-light);
+            letter-spacing: 3px;
+            font-weight: 300;
+            margin-bottom: 36px;
         }
 
         .hero-iniciais {
@@ -223,14 +232,40 @@
             opacity: 0.3;
         }
 
+        /* Botão RSVP no hero */
+        .hero-rsvp {
+            display: inline-block;
+            margin-top: 0;
+            padding: 16px 44px;
+            background: var(--terracota);
+            color: white;
+            text-decoration: none;
+            font-size: 0.72rem;
+            letter-spacing: 2.5px;
+            text-transform: uppercase;
+            font-weight: 400;
+            border-radius: 30px;
+            transition: all 0.35s ease;
+            box-shadow: 0 6px 24px rgba(184,92,72,0.3);
+            min-height: 52px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .hero-rsvp:hover {
+            background: #A0503D;
+            transform: translateY(-2px);
+            box-shadow: 0 10px 32px rgba(184,92,72,0.4);
+        }
+
         .contador {
-            position: absolute;
-            bottom: 100px;
             font-size: 0.65rem;
             letter-spacing: 2px;
             color: var(--text-light);
             text-transform: uppercase;
             text-align: center;
+            margin-bottom: 28px;
         }
 
         .contador-numero {
@@ -256,38 +291,65 @@
 
         .scroll-hint {
             position: absolute;
-            bottom: 50px;
+            bottom: 24px;
             left: 50%;
             transform: translateX(-50%);
             animation: float 3s ease-in-out infinite;
         }
 
         .scroll-hint svg {
-            width: 24px;
-            height: 24px;
+            width: 20px;
+            height: 20px;
             stroke: var(--terracota-light);
             fill: none;
             stroke-width: 1;
-            opacity: 0.6;
+            opacity: 0.4;
+        }
+
+        /* Label de convite no hero */
+        .hero-convite-label {
+            font-size: 0.7rem;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: var(--terracota);
+            font-weight: 300;
+            margin-bottom: 20px;
+            opacity: 0.85;
+        }
+
+        /* RSVP final */
+        .rsvp-final-section {
+            padding: 60px 20px 80px;
+            text-align: center;
+            background: var(--white);
+        }
+
+        .rsvp-final-texto {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.1rem;
+            font-style: italic;
+            color: var(--text-light);
+            margin-bottom: 24px;
+            font-weight: 300;
         }
 
         /* Convite */
         .convite-section {
-            padding: 120px 20px 80px;
-            max-width: 650px;
+            padding: 80px 20px 60px;
+            max-width: 620px;
             margin: 0 auto;
             text-align: center;
         }
 
         .convite-texto {
             font-family: 'Cormorant Garamond', serif;
-            font-size: clamp(1.2rem, 2.5vw, 1.5rem);
+            font-size: clamp(1.15rem, 2.5vw, 1.4rem);
             font-weight: 300;
-            line-height: 2.4;
+            line-height: 2.2;
             color: var(--text);
             font-style: italic;
-            margin-bottom: 50px;
-            letter-spacing: 0.5px;
+            margin-bottom: 32px;
+            letter-spacing: 0.3px;
         }
 
         .convite-assinatura {
@@ -296,6 +358,78 @@
             letter-spacing: 3px;
             text-transform: uppercase;
             font-weight: 300;
+            margin-bottom: 24px;
+        }
+
+        .convite-cta {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 0.95rem;
+            font-style: italic;
+            color: var(--terracota-light);
+            letter-spacing: 1px;
+            margin-top: 8px;
+        }
+
+        /* Link mapa */
+        .mapa-link {
+            display: inline-block;
+            margin-top: 20px;
+            font-size: 0.72rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--terracota-light);
+            text-decoration: none;
+            border-bottom: 1px solid rgba(184,92,72,0.3);
+            padding-bottom: 2px;
+            transition: color 0.3s, border-color 0.3s;
+        }
+
+        .mapa-link:hover {
+            color: var(--terracota);
+            border-color: var(--terracota);
+        }
+
+        /* Atalhos rápidos no convite */
+        .convite-atalhos {
+            display: flex;
+            gap: 16px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 48px;
+        }
+
+        .atalho-btn {
+            display: inline-block;
+            padding: 14px 32px;
+            border-radius: 30px;
+            font-size: 0.72rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            font-weight: 400;
+            text-decoration: none;
+            transition: all 0.35s ease;
+            border: 1px solid rgba(184,92,72,0.35);
+            color: var(--terracota);
+            background: transparent;
+        }
+
+        .atalho-btn:hover {
+            background: rgba(184,92,72,0.06);
+            border-color: var(--terracota);
+        }
+
+        .atalho-btn-primary {
+            background: var(--terracota);
+            color: white;
+            border-color: var(--terracota);
+            box-shadow: 0 6px 20px rgba(184,92,72,0.25);
+        }
+
+        .atalho-btn-primary:hover {
+            background: #A0503D;
+            border-color: #A0503D;
+            transform: translateY(-2px);
+            box-shadow: 0 10px 28px rgba(184,92,72,0.35);
         }
 
         /* Versículo */
@@ -479,14 +613,14 @@
             font-weight: 300;
         }
 
-        /* SEÇÃO DE POLAROIDS - ESTILO NOVO */
+        /* SEÇÃO DE POLAROID - UM SÓ */
         .polaroids-section {
-            padding: 100px 20px;
+            padding: 80px 20px;
             background: linear-gradient(to bottom, var(--cream), var(--sand));
             display: flex;
             justify-content: center;
-            align-items: flex-start;
-            min-height: 100vh;
+            align-items: center;
+            min-height: 60vh;
         }
 
         .polaroids-container {
@@ -494,43 +628,7 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: 0;
             padding: 40px 0;
-        }
-
-        /* Linhas de conexão delicadas */
-        .connection-line {
-            width: 1px;
-            height: 60px;
-            background: linear-gradient(to bottom, 
-                transparent 0%, 
-                rgba(184, 92, 72, 0.3) 20%, 
-                rgba(184, 92, 72, 0.3) 80%, 
-                transparent 100%
-            );
-            position: relative;
-            opacity: 0.6;
-        }
-
-        .connection-line::before,
-        .connection-line::after {
-            content: '';
-            position: absolute;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 4px;
-            height: 4px;
-            background: var(--terracota-light);
-            border-radius: 50%;
-            opacity: 0.5;
-        }
-
-        .connection-line::before {
-            top: 0;
-        }
-
-        .connection-line::after {
-            bottom: 0;
         }
 
         /* Estilo Polaroid */
@@ -542,18 +640,17 @@
                 0 10px 20px rgba(0,0,0,0.08),
                 0 2px 4px rgba(0,0,0,0.04);
             transform-origin: center center;
-            transition: all 0.4s ease;
             position: relative;
             cursor: pointer;
+            animation: windSway1 6s ease-in-out infinite;
+            transform: rotate(-2deg);
+            transition: box-shadow 0.4s ease;
         }
 
         .polaroid:hover {
-            transform: scale(1.03) rotate(0deg) !important;
             box-shadow: 
                 0 8px 12px rgba(0,0,0,0.08),
-                0 20px 40px rgba(0,0,0,0.12),
-                0 4px 8px rgba(0,0,0,0.06);
-            z-index: 10;
+                0 20px 40px rgba(0,0,0,0.12);
         }
 
         .polaroid-image {
@@ -568,31 +665,34 @@
             width: 100%;
             height: 100%;
             object-fit: cover;
-            filter: sepia(10%) contrast(1.05) brightness(1.02);
-            transition: all 0.4s ease;
+            filter: sepia(8%) contrast(1.05) brightness(1.02);
+            transition: all 0.6s ease;
         }
 
-        .polaroid:hover .polaroid-image img {
-            filter: sepia(0%) contrast(1.1) brightness(1.05);
-            transform: scale(1.05);
+        /* Efeito de luz varrendo a foto */
+        .polaroid-image::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 60%;
+            height: 100%;
+            background: linear-gradient(
+                105deg,
+                transparent 30%,
+                rgba(255, 255, 255, 0.18) 50%,
+                transparent 70%
+            );
+            animation: lightSweep 5s ease-in-out infinite;
+            pointer-events: none;
         }
 
-        /* Animações de vento individuais */
-        .polaroid:nth-child(1) {
-            animation: windSway1 6s ease-in-out infinite;
-            transform: rotate(-3deg);
-        }
-
-        .polaroid:nth-child(3) {
-            animation: windSway2 7s ease-in-out infinite;
-            animation-delay: 0.5s;
-            transform: rotate(2deg);
-        }
-
-        .polaroid:nth-child(5) {
-            animation: windSway3 5s ease-in-out infinite;
-            animation-delay: 1s;
-            transform: rotate(-2deg);
+        @keyframes lightSweep {
+            0%   { left: -80%; opacity: 0; }
+            10%  { opacity: 1; }
+            60%  { left: 140%; opacity: 1; }
+            61%  { opacity: 0; }
+            100% { left: 140%; opacity: 0; }
         }
 
         /* Fita adesiva sutil */
@@ -638,54 +738,6 @@
             line-height: 2.2;
             color: var(--text-light);
             font-weight: 300;
-        }
-
-        .local-info {
-            margin-bottom: 50px;
-        }
-
-        .local-subtitulo {
-            font-size: 0.8rem;
-            color: var(--text-light);
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            margin-bottom: 10px;
-        }
-
-        .local-nome {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 1.5rem;
-            color: var(--terracota);
-            margin-bottom: 8px;
-            font-weight: 400;
-            font-style: italic;
-        }
-
-        /* NOVO: Horário elegante */
-        .local-horario {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 1.1rem;
-            color: var(--text);
-            margin-bottom: 12px;
-            font-weight: 400;
-            letter-spacing: 1.5px;
-            position: relative;
-            display: inline-block;
-        }
-
-        .local-horario::before,
-        .local-horario::after {
-            content: '•';
-            margin: 0 12px;
-            color: var(--terracota-light);
-            font-size: 0.6rem;
-            vertical-align: middle;
-        }
-
-        .local-endereco {
-            font-size: 0.85rem;
-            color: var(--text-light);
-            letter-spacing: 1px;
         }
 
         .mapa-container {
@@ -1092,7 +1144,65 @@
             font-weight: 300;
         }
 
-        /* Presentes */
+        /* ── DESTAQUE: Local info ── */
+        .local-info {
+            margin-bottom: 50px;
+            background: var(--text);
+            color: white;
+            padding: 48px 56px;
+            border-radius: 16px;
+            display: inline-block;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .local-info::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(ellipse at 30% 50%, rgba(184,92,72,0.15), transparent 70%);
+            pointer-events: none;
+        }
+
+        .local-subtitulo {
+            font-size: 0.7rem;
+            color: rgba(255,255,255,0.45);
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            margin-bottom: 12px;
+        }
+
+        .local-nome {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(2rem, 4vw, 3rem);
+            color: white;
+            margin-bottom: 16px;
+            font-weight: 300;
+            font-style: italic;
+            line-height: 1.1;
+        }
+
+        .local-horario {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(1.1rem, 2vw, 1.4rem);
+            color: var(--terracota-light);
+            margin-bottom: 14px;
+            font-weight: 400;
+            letter-spacing: 1.5px;
+            display: block;
+        }
+
+        .local-horario::before,
+        .local-horario::after { display: none; }
+
+        .local-endereco {
+            font-size: 0.8rem;
+            color: rgba(255,255,255,0.45);
+            line-height: 1.8;
+            letter-spacing: 0.5px;
+        }
+
+        /* ── DESTAQUE: Presentes ── */
         .presentes-section {
             padding: 120px 20px;
             display: flex;
@@ -1133,60 +1243,66 @@
 
         .btn-elegante {
             display: inline-block;
-            padding: 14px 35px;
+            padding: 14px 36px;
             background: transparent;
             color: var(--terracota);
             text-decoration: none;
-            font-size: 0.7rem;
+            font-size: 0.72rem;
             letter-spacing: 2.5px;
             text-transform: uppercase;
             font-weight: 400;
-            border: 1px solid rgba(184, 92, 72, 0.3);
+            border: 1px solid rgba(184,92,72,0.4);
             border-radius: 30px;
-            transition: all 0.4s ease;
+            transition: all 0.35s ease;
             cursor: pointer;
         }
 
         .btn-elegante:hover {
-            background: var(--terracota);
-            color: white;
+            background: rgba(184,92,72,0.06);
             border-color: var(--terracota);
             transform: translateY(-2px);
-            box-shadow: 0 5px 20px rgba(184, 92, 72, 0.15);
         }
 
-        /* Confirmação */
+        /* ── DESTAQUE: Confirmação ── */
         .confirmacao-section {
             padding: 140px 20px;
             text-align: center;
-            background: linear-gradient(to bottom, var(--white), var(--sand));
+            background: var(--text);
             position: relative;
+            overflow: hidden;
         }
 
         .confirmacao-section::before {
-            content: '';
+            content: 'I & C';
             position: absolute;
-            top: 50px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 1px;
-            height: 60px;
-            background: linear-gradient(to bottom, var(--terracota-light), transparent);
-            opacity: 0.4;
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 220px;
+            font-weight: 300;
+            color: rgba(255,255,255,0.03);
+            top: 50%; left: 50%;
+            transform: translate(-50%, -50%);
+            pointer-events: none;
+            white-space: nowrap;
+            letter-spacing: 20px;
+        }
+
+        .confirmacao-section .section-label {
+            color: var(--terracota-light);
         }
 
         .confirmacao-texto {
             font-family: 'Cormorant Garamond', serif;
-            font-size: 1.2rem;
-            color: var(--text);
+            font-size: clamp(1.4rem, 3vw, 2rem);
+            color: white;
             margin-bottom: 15px;
             font-weight: 300;
             font-style: italic;
+            line-height: 1.5;
         }
 
         .confirmacao-prazo {
             font-size: 0.75rem;
-            color: var(--text-light);
+            color: rgba(255,255,255,0.35);
             letter-spacing: 1px;
             margin-bottom: 50px;
         }
@@ -1195,7 +1311,7 @@
             display: inline-flex;
             align-items: center;
             gap: 12px;
-            padding: 18px 45px;
+            padding: 20px 52px;
             background: var(--terracota);
             color: white;
             text-decoration: none;
@@ -1205,13 +1321,13 @@
             font-weight: 400;
             border-radius: 30px;
             transition: all 0.4s ease;
-            box-shadow: 0 4px 20px rgba(184, 92, 72, 0.2);
+            box-shadow: 0 6px 30px rgba(184,92,72,0.35);
         }
 
         .btn-confirmar:hover {
             background: #A0503D;
             transform: translateY(-3px);
-            box-shadow: 0 8px 30px rgba(184, 92, 72, 0.3);
+            box-shadow: 0 12px 40px rgba(184,92,72,0.45);
         }
 
         /* Footer */
@@ -1281,6 +1397,34 @@
 
             .menu a {
                 font-size: 0.6rem;
+                letter-spacing: 2px;
+            }
+
+            .convite-atalhos {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .atalho-btn {
+                width: 100%;
+                max-width: 280px;
+                text-align: center;
+            }
+
+            .hero-rsvp {
+                width: 100%;
+                max-width: 300px;
+                padding: 18px 24px;
+                font-size: 0.8rem;
+                min-height: 56px;
+            }
+
+            .rsvp-final-section {
+                padding: 40px 20px 60px;
+            }
+
+            .hero-convite-label {
+                font-size: 0.62rem;
                 letter-spacing: 2px;
             }
 
@@ -1387,25 +1531,26 @@
 
     <!-- Menu -->
     <nav class="menu" id="menu">
-        <a href="#historia">Nossa História</a>
         <a href="#local">Local</a>
-        <a href="#manual">Manual</a>
         <a href="#presentes">Presentes</a>
         <a href="#confirmacao">Confirme sua Presença</a>
     </nav>
 
     <!-- Hero -->
     <section class="hero">
+        <p class="hero-convite-label reveal-text">Você está convidado para o nosso casamento</p>
         <h1 class="hero-names reveal-text">Isabel <span>&</span> Calebe</h1>
         <p class="hero-date reveal-text">27 de Junho de 2026</p>
-        <p class="hero-iniciais reveal-text">I &nbsp;&amp;&nbsp; C</p>
-        
+        <p class="hero-horario reveal-text">Sábado · 15h30</p>
+
         <div class="contador reveal-text">
             Faltam
             <span class="contador-numero" id="contador">calculando...</span>
         </div>
 
-        <div class="scroll-hint reveal-text">
+        <a href="#confirmacao" class="hero-rsvp reveal-text">Confirmar presença</a>
+
+        <div class="scroll-hint">
             <svg viewBox="0 0 24 24"><path d="M12 5v14M19 12l-7 7-7-7"/></svg>
         </div>
     </section>
@@ -1413,14 +1558,28 @@
     <!-- Convite -->
     <section class="convite-section" id="historia">
         <p class="convite-texto reveal-text">
-            Há momentos na vida que nascem do encontro de duas almas.<br>
-            Decidimos caminhar juntos, construindo uma história<br>
-            escrita com amor, respeito e alegria.<br><br>
-            Neste dia especial, queremos celebrar não apenas nossa união,<br>
-            mas a bênção de tê-los ao nosso lado,<br>
-            testemunhando o início deste capítulo eterno.
+            Tudo começou de forma simples, como as melhores histórias começam.<br>
+            Entre conversas, risadas e momentos compartilhados,<br>
+            descobrimos algo maior: um amor que vale a pena construir todos os dias.<br><br>
+            Agora, queremos dar o próximo passo —<br>
+            e nada faria mais sentido do que ter vocês ao nosso lado nesse momento.<br>
+            Mal podemos esperar para viver esse dia com você.
         </p>
         <p class="convite-assinatura reveal-text">Com carinho, Isabel & Calebe</p>
+        <p class="convite-cta reveal-text">Confirme sua presença abaixo. ↓</p>
+    </section>
+
+    <!-- Confirmação — antecipada antes do local -->
+    <section class="confirmacao-section" id="confirmacao">
+        <p class="section-label reveal-text">Confirme sua Presença</p>
+        <p class="confirmacao-texto reveal-text">
+            Contamos com você para tornar este dia ainda mais especial.
+        </p>
+        <p class="confirmacao-prazo reveal-text">Por favor, confirme até 01 de junho de 2026</p>
+        <a href="https://forms.gle/F4TxXoPe585AyBtq9"
+           class="btn-confirmar reveal-text" target="_blank">
+            <span>Confirmar presença</span>
+        </a>
     </section>
 
     <!-- Versículo -->
@@ -1432,33 +1591,13 @@
         </p>
         <p class="versiculo-ref reveal-text">1 Coríntios 13:4-7</p>
     </section>
-    <!-- SEÇÃO DE POLAROIDS -->
+
+    <!-- SEÇÃO DE POLAROID -->
     <section class="polaroids-section">
         <div class="polaroids-container">
-            <!-- Polaroid 1 -->
             <div class="polaroid reveal-text">
                 <div class="polaroid-image">
-                    <img src="https://lh3.googleusercontent.com/d/1_r4LFA_0r7LmEaVZui4jQWb5weMfPvSi" alt="Pré Wedding 1">
-                </div>
-            </div>
-            
-            <!-- Linha de conexão 1 -->
-            <div class="connection-line"></div>
-            
-            <!-- Polaroid 2 -->
-            <div class="polaroid reveal-text">
-                <div class="polaroid-image">
-                    <img src="https://lh3.googleusercontent.com/d/1A_RGH_wXCeW0kz7P7LlGptd4ulupn76E" alt="Pré Wedding 2">
-                </div>
-            </div>
-            
-            <!-- Linha de conexão 2 -->
-            <div class="connection-line"></div>
-            
-            <!-- Polaroid 3 -->
-            <div class="polaroid reveal-text">
-                <div class="polaroid-image">
-                    <img src="https://lh3.googleusercontent.com/d/1odIPwIHeiXjZM8GJOLyNtO7-yqmw9UFH" alt="Pré Wedding 3">
+                    <img src="https://lh3.googleusercontent.com/d/1_r4LFA_0r7LmEaVZui4jQWb5weMfPvSi" alt="Isabel & Calebe">
                 </div>
             </div>
         </div>
@@ -1468,39 +1607,31 @@
     <section class="local-section" id="local">
         <div class="local-content">
             <p class="section-label reveal-text">O Grande Dia</p>
-            <h2 class="local-titulo reveal-text">Um Dia Inesquecível</h2>
-            <p class="local-texto reveal-text">
-                Preparamos com muito carinho cada detalhe desta celebração.<br>
-                Escolhemos um lugar especial em Pedro Leopoldo, cercado por natureza<br>
-                e com uma energia única, para compartilharmos este momento<br>
-                tão significativo com quem amamos.
-            </p>
             <div class="local-info reveal-text">
                 <p class="local-subtitulo">Sítio</p>
                 <p class="local-nome">Espaço Verde Perto</p>
-                <!-- NOVO: Horário elegante -->
-                <p class="local-horario">Sábado, 27 de Junho de 2026 às 15h30</p>
-                <p class="local-endereco">R. dos Lírios, 317 — Quinta das Palmeiras<br>Pedro Leopoldo, MG — 33600-000</p>
+                <p class="local-horario">Sábado, 27 de Junho de 2026 · 15h30</p>
+                <p class="local-endereco">R. dos Lírios, 317 — Quinta das Palmeiras<br>Pedro Leopoldo, MG</p>
+                <a href="https://maps.google.com/?q=R.+dos+Lírios,+317,+Quinta+das+Palmeiras,+Pedro+Leopoldo,+MG" target="_blank" class="mapa-link reveal-text">Ver no Google Maps →</a>
             </div>
             <div class="mapa-container reveal-text">
-                <iframe 
+                <iframe
                     class="mapa-embed"
                     src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3750.0!2d-44.05!3d-19.58!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMTnCsDM0JzQ4LjAiUyA0NMKwMDMnMDAuMCJX!5e0!3m2!1spt-BR!2sbr!4v1600000000000!5m2!1spt-BR!2sbr"
                     allowfullscreen=""
                     loading="lazy">
                 </iframe>
             </div>
-            
             <!-- Botões de Transporte -->
             <div class="transporte-btns reveal-text">
-                <a href="https://m.uber.com/ul/?action=setPickup&dropoff[latitude]=-19.6167&dropoff[longitude]=-44.05&dropoff[nickname]=Espaço%20Verde%20Perto&dropoff[formatted_address]=R.%20dos%20L%C3%ADrios%2C%20317%20-%20Quinta%20das%20Palmeiras%2C%20Pedro%20Leopoldo%20-%20MG%2C%2033600-000" 
+                <a href="https://m.uber.com/ul/?action=setPickup&dropoff[latitude]=-19.6167&dropoff[longitude]=-44.05&dropoff[nickname]=Espaço%20Verde%20Perto&dropoff[formatted_address]=R.%20dos%20L%C3%ADrios%2C%20317%20-%20Quinta%20das%20Palmeiras%2C%20Pedro%20Leopoldo%20-%20MG%2C%2033600-000"
                    class="transporte-btn-minimal" target="_blank">
                     <div class="transporte-icone">
                         <img src="https://lh3.googleusercontent.com/d/1eLOtue7KjffR8G_Ry1dCiRbxxuMmnNMc" alt="Uber">
                     </div>
                     <span class="transporte-label">Chamar Uber</span>
                 </a>
-                <a href="https://waze.com/ul?q=R.%20dos%20L%C3%ADrios%2C%20317%20-%20Quinta%20das%20Palmeiras%2C%20Pedro%20Leopoldo%20-%20MG%2C%2033600-000&navigate=yes" 
+                <a href="https://waze.com/ul?q=R.%20dos%20L%C3%ADrios%2C%20317%20-%20Quinta%20das%20Palmeiras%2C%20Pedro%20Leopoldo%20-%20MG%2C%2033600-000&navigate=yes"
                    class="transporte-btn-minimal" target="_blank">
                     <div class="transporte-icone">
                         <img src="https://lh3.googleusercontent.com/d/1AsxLK-NaWcD599t2UQkmfwuJKcyZ_vxP" alt="Waze">
@@ -1538,110 +1669,6 @@
         <p class="galeria-hint reveal-text">Arraste para ver mais fotos</p>
     </section>
 
-    <!-- Save the Date -->
-    <section class="save-date-section" id="save-date">
-        <p class="section-label reveal-text" style="margin-bottom: 40px;">Save the Date</p>
-        <div class="calendario-container reveal-text">
-            <div class="calendario-mes">Junho 2026</div>
-            <div class="calendario-grid">
-                <div class="calendario-dia-semana">Dom</div>
-                <div class="calendario-dia-semana">Seg</div>
-                <div class="calendario-dia-semana">Ter</div>
-                <div class="calendario-dia-semana">Qua</div>
-                <div class="calendario-dia-semana">Qui</div>
-                <div class="calendario-dia-semana">Sex</div>
-                <div class="calendario-dia-semana">Sáb</div>
-                
-                <div class="calendario-dia outro-mes">31</div>
-                <div class="calendario-dia">1</div>
-                <div class="calendario-dia">2</div>
-                <div class="calendario-dia">3</div>
-                <div class="calendario-dia">4</div>
-                <div class="calendario-dia">5</div>
-                <div class="calendario-dia">6</div>
-                
-                <div class="calendario-dia">7</div>
-                <div class="calendario-dia">8</div>
-                <div class="calendario-dia">9</div>
-                <div class="calendario-dia">10</div>
-                <div class="calendario-dia">11</div>
-                <div class="calendario-dia">12</div>
-                <div class="calendario-dia">13</div>
-                
-                <div class="calendario-dia">14</div>
-                <div class="calendario-dia">15</div>
-                <div class="calendario-dia">16</div>
-                <div class="calendario-dia">17</div>
-                <div class="calendario-dia">18</div>
-                <div class="calendario-dia">19</div>
-                <div class="calendario-dia">20</div>
-                
-                <div class="calendario-dia">21</div>
-                <div class="calendario-dia">22</div>
-                <div class="calendario-dia">23</div>
-                <div class="calendario-dia">24</div>
-                <div class="calendario-dia">25</div>
-                <div class="calendario-dia">26</div>
-                <div class="calendario-dia especial">27</div>
-                
-                <div class="calendario-dia">28</div>
-                <div class="calendario-dia">29</div>
-                <div class="calendario-dia">30</div>
-                <div class="calendario-dia outro-mes">1</div>
-                <div class="calendario-dia outro-mes">2</div>
-                <div class="calendario-dia outro-mes">3</div>
-                <div class="calendario-dia outro-mes">4</div>
-            </div>
-        </div>
-        <p class="save-date-texto reveal-text">Reserve esta data em seu coração</p>
-    </section>
-
-    <!-- Manual do Convidado -->
-    <section class="manual-section" id="manual">
-        <div class="manual-container">
-            <p class="section-label reveal-text">Manual do Convidado</p>
-            <h2 class="local-titulo reveal-text" style="text-align: center;">Dicas para uma Experiência Perfeita</h2>
-            
-            <div class="manual-grid">
-                <div class="manual-card reveal-text">
-                    <div class="manual-icone">✓</div>
-                    <h3 class="manual-titulo">Confirme sua Presença</h3>
-                    <p class="manual-texto">Sua confirmação é essencial para acessar o local da festa. O espaço é privado e só permite entrada mediante confirmação prévia.</p>
-                </div>
-                
-                <div class="manual-card reveal-text">
-                    <div class="manual-icone">🕐</div>
-                    <h3 class="manual-titulo">Chegue com Antecedência</h3>
-                    <p class="manual-texto">Sugerimos chegar com pelo menos 30 minutos de antecedência. Assim você aproveita o momento sem pressa e não perde nenhum detalhe especial.</p>
-                </div>
-                
-                <div class="manual-card reveal-text">
-                    <div class="manual-icone">📸</div>
-                    <h3 class="manual-titulo">Tire Bastante Fotos</h3>
-                    <p class="manual-texto">Queremos ver o dia pelos olhos de vocês! Capture os momentos, as emoções e compartilhe conosco depois. Cada registro será um tesouro.</p>
-                </div>
-                
-                <div class="manual-card reveal-text">
-                    <div class="manual-icone">👗</div>
-                    <h3 class="manual-titulo">Vista-se Confortável</h3>
-                    <p class="manual-texto">O evento será ao ar livre, na grama. Escolha sapatos confortáveis e roupas que permitam aproveitar a festa com tranquilidade.</p>
-                </div>
-                
-                <div class="manual-card reveal-text">
-                    <div class="manual-icone">🌿</div>
-                    <h3 class="manual-titulo">Respeite a Natureza</h3>
-                    <p class="manual-texto">O Espaço Verde Perto é um lugar mágico. Ajude-nos a preservá-lo: use copos descartáveis com consciência e aproveite o verde ao redor.</p>
-                </div>
-                
-                <div class="manual-card reveal-text">
-                    <div class="manual-icone">💃</div>
-                    <h3 class="manual-titulo">Prepare-se para Dançar</h3>
-                    <p class="manual-texto">Teremos muita música, alegria e celebração. Traga sua energia positiva e disposição para curtir cada momento ao lado da gente!</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
     <!-- Presentes -->
     <section class="presentes-section" id="presentes">
         <div class="presentes-foto reveal-text">
@@ -1650,27 +1677,11 @@
         <div class="presentes-content reveal-text">
             <p class="section-label" style="text-align: left; margin-bottom: 30px;">Lista de Presentes</p>
             <p class="presentes-texto">
-                Sua presença é nosso maior presente.<br>
-                Mas se desejar nos abençoar de outra forma,<br>
-                separamos algumas sugestões que serão<br>
-                muito especiais para nós.
+                Caso deseje nos presentear,<br>
+                separamos algumas sugestões com carinho.
             </p>
-            <!-- ÚNICA ALTERAÇÃO: href atualizado para o site de presentes -->
-            <a href="https://alvaroteodorolima-byte.github.io/Sugest-o-presente/" class="btn-elegante" target="_blank">Ver Sugestões</a>
+            <a href="https://alvaroteodorolima-byte.github.io/Sugest-o-presente/" class="btn-elegante" target="_blank">Ver lista de presentes</a>
         </div>
-    </section>
-
-    <!-- Confirmação -->
-    <section class="confirmacao-section" id="confirmacao">
-        <p class="section-label reveal-text">Confirme sua Presença</p>
-        <p class="confirmacao-texto reveal-text">
-            Contamos com você para tornar este dia ainda mais especial.
-        </p>
-        <p class="confirmacao-prazo reveal-text">Por favor, confirme até 01 de junho de 2026</p>
-        <a href="https://forms.gle/F4TxXoPe585AyBtq9" 
-           class="btn-confirmar reveal-text" target="_blank">
-            <span>Confirme sua presença</span>
-        </a>
     </section>
 
     <!-- Footer -->
